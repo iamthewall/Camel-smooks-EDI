@@ -1,4 +1,6 @@
-POC-Avianca
+Camel-FilConvert-EDI
 ===========
+This example that is based on a customer's proof of concept, transform EDI files to XML and CSV.
 
-EDI to XML and EDI to CSV use cases
+Both use cases are published in this repo
+
