@@ -14,7 +14,7 @@
 	
 	<camelContext xmlns="http://camel.apache.org/schema/spring">
     <route id="AviancaEDIXMLSplitQueue">
-        <from uri="file:src/data/inbox?noop=true"/>
+        <from uri="file:src/data/inboxXML?noop=true"/>
         <split parallelProcessing="false" streaming="true" timeout="0" id="encolamientoEDIXML">
             <tokenize token="&#28;UNH" endToken="UNT" includeTokens="false" group="1000"></tokenize>
             <loadBalance>
