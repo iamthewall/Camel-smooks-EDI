@@ -8,7 +8,7 @@
   <packaging>jar</packaging>
   <version>1.0.0-SNAPSHOT</version>
 
-  <name>Avianca EDI to CSV</name>
+  <name>EDI to CSV</name>
   <url>http://www.myorganization.org</url>
 
   <properties>
