@@ -1,1 +1,10 @@
-1. Se debe cambiar el heap size
+1. Se debe cambiar el heap size - http://stackoverflow.com/questions/7353981/setting-java-heap-size-under-apache-karaf
+
+memory values could be configured in the bin/setenv file:
+
+export JAVA_MIN_MEM=256M # Minimum memory for the JVM
+export JAVA_MAX_MEM=1024M # Maximum memory for the JVM
+export JAVA_PERM_MEM=128M # Minimum perm memory for the JVM
+export JAVA_MAX_PERM_MEM=256M # Maximum memory for the JVM
+
+2. Instalar Smooks en Karaf (para subirlo al ESB) - pendiente
