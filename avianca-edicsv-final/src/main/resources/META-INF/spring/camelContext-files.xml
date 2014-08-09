@@ -24,7 +24,7 @@
 
 	<bean id="procesarASCII" class="com.avianca.procesarASCII"/>
 
-	<camelContext id="edi-csv-standalone" xmlns="http://camel.apache.org/schema/spring">
+	<camelContext xmlns="http://camel.apache.org/schema/spring">
     <route id="AviancaSplitFile">
         <from uri="file:src/data/inbox?noop=true"/>
         <split parallelProcessing="false" streaming="true" timeout="0" id="divisionGrandeFile">
