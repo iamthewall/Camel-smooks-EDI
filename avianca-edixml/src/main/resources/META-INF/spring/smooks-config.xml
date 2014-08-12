@@ -6,6 +6,7 @@
     xmlns:core="http://www.milyn.org/xsd/smooks/smooks-core-1.4.xsd">
 
     <edi:reader mappingModel="src/main/resources/META-INF/spring/edi-to-xml-order-mapping.xml" />
+    
 
     <core:exports>
         <core:result type="org.milyn.payload.StringResult"/>

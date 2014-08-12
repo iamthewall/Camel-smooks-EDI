@@ -5,11 +5,13 @@
 
   <groupId>com.mycompany</groupId>
   <artifactId>FILE-edi-to-xml-final</artifactId>
+  
+  <!--  bundle instead of jar to USE the felix plugin. May be changed to local deploy -->
   <packaging>jar</packaging>
-  <version>1.0.0-SNAPSHOT</version>
+  <version>1.0.5-SNAPSHOT</version>
 
-  <name>A Camel Spring Route</name>
-  <url>http://www.myorganization.org</url>
+  <name>FILE-edi-to-xml-final</name>
+  <url></url>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -69,28 +71,29 @@
 
   <dependencies>
   
-  		<dependency>
-            <groupId>org.milyn</groupId>
-            <artifactId>milyn-smooks-core</artifactId>
-            <version>1.5.2</version>
-            <!--  para que corra en el ESB. CON ESTO EN EL IDE NO SIRVE -->
-            <scope>provided</scope> 
-        </dependency>
-  
 		<dependency>
             <groupId>org.milyn</groupId>
             <artifactId>milyn-smooks-camel</artifactId>
             <version>1.5.2</version>
-            <!--  para que corra en el ESB. CON ESTO EN EL IDE NO SIRVE -->
-            <scope>provided</scope>
+            <!--  para que corra en el ESB. CON ESTO EN EL IDE NO SIRVE 
+            <scope>provided</scope>-->
         </dependency>
-        
-        <dependency>
+  
+  		<dependency>
             <groupId>org.milyn</groupId>
             <artifactId>milyn-smooks-edi</artifactId>
             <version>1.5.2</version>
+            <!--  para que corra en el ESB. CON ESTO EN EL IDE NO SIRVE
+            <scope>provided</scope>-->
+        </dependency>
+              
+        <!-- COULD BE THE XSD CONTAINER -->
+        <dependency>
+            <groupId>org.milyn</groupId>
+            <artifactId>milyn-edisax-parser</artifactId>
+            <version>1.5.2</version>
             <!--  para que corra en el ESB. CON ESTO EN EL IDE NO SIRVE-->
-            <scope>provided</scope>
+            
         </dependency>
         
         <dependency>
@@ -116,8 +119,7 @@
     		<version>${camel-version}</version>    
 		</dependency>
 		
-		<!-- esto molesta en fuse pero se necesita para que corra local -->
-		<dependency>
+	 <dependency>
 			<groupId>org.apache.activemq</groupId>
 			<artifactId>activemq-osgi</artifactId>
 			<version>5.8.0.redhat-60024</version>
@@ -139,6 +141,16 @@
 	      <version>1.2.17</version>
 	    </dependency>  
     
+    <!--  END OF CORE DEPENDENCIES (DEPENDENCIES REQUIRED IN LOCAL CONTEXT) -->
+    
+    <!--  BEGIN OF TEST DEPENDENCIES -->
+    
+    <!-- ERROR: osgi.wiring.package; (&(osgi.wiring.package=org.hsqldb)(version>=1.8.0.7)(!(version>=2.0.0))) -->
+    <dependency>
+			<groupId>org.hsqldb</groupId>
+			<artifactId>hsqldb</artifactId>
+			<version>2.3.2</version>
+	</dependency>
   </dependencies>
 
   <build>
@@ -169,24 +181,8 @@
         <artifactId>camel-maven-plugin</artifactId>
         <version>2.10.0.redhat-60024</version>
       </plugin>
-      <!-- 
-      <plugin>
-                <groupId>org.apache.felix</groupId>
-                <artifactId>maven-bundle-plugin</artifactId>
-                
-                <extensions>true</extensions>
-                <configuration>
-                    <instructions>
-                        <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
-                        <Import-Package>org.milyn.*;version="${project.version}",
-                            javax.xml.transform.stream,
-                            *;-nouses:=true
-                        </Import-Package>                                             
-                        <Smooks-Config>${basedir}/src/main/smooks/smooks-config.xml</Smooks-Config>                        
-                    </instructions>
-                </configuration>
-            </plugin>
-      -->
+            
+      
     </plugins>
   </build>
 

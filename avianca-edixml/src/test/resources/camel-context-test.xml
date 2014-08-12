@@ -10,7 +10,7 @@
 	<bean id="exampleRouteBuilder" class="example.ExampleRouteBuilder"/>
 	
 	<camelContext id="camelContext" xmlns="http://camel.apache.org/schema/spring">
-		<routeBuilder ref="exampleRouteBuilder" />    
-	</camelContext>
+    <routeBuilder ref="exampleRouteBuilder"/>
+</camelContext>
 
 </beans>
