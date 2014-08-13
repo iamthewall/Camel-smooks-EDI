@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.mycompany</groupId>
+  <artifactId>FILE-edi-to-xml-final</artifactId>
+  <!--  bundle instead of jar to USE the felix plugin. May be changed to local deploy -->
+  <packaging>bundle</packaging>
+  <version>1.0.2-SNAPSHOT</version>
+
+  <name>FILE-edi-to-xml-final</name>
+  <url></url>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>           
+    <camel-version>2.10.0.redhat-60024</camel-version>
+  </properties>
+
+  <repositories>
+    <repository>
+      <id>release.fusesource.org</id>
+      <name>FuseSource Release Repository</name>
+      <url>http://repo.fusesource.com/nexus/content/repositories/releases</url>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+      <releases>
+        <enabled>true</enabled>
+      </releases>
+    </repository>
+    <repository>
+      <id>snapshot.fusesource.org</id>
+      <name>FuseSource Snapshot Repository</name>
+      <url>http://repo.fusesource.com/nexus/content/repositories/snapshots</url>
+      <snapshots>
+        <enabled>true</enabled>
+      </snapshots>
+      <releases>
+        <enabled>false</enabled>
+      </releases>
+    </repository>
+  </repositories>
+
+  <pluginRepositories>
+    <pluginRepository>
+      <id>release.fusesource.org</id>
+      <name>FuseSource Release Repository</name>
+      <url>http://repo.fusesource.com/nexus/content/repositories/releases</url>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+      <releases>
+        <enabled>true</enabled>
+      </releases>
+    </pluginRepository>
+    <pluginRepository>
+      <id>snapshot.fusesource.org</id>
+      <name>FuseSource Snapshot Repository</name>
+      <url>http://repo.fusesource.com/nexus/content/repositories/snapshots</url>
+      <snapshots>
+        <enabled>true</enabled>
+      </snapshots>
+      <releases>
+        <enabled>false</enabled>
+      </releases>
+    </pluginRepository>  
+  </pluginRepositories>
+
+  <dependencies>
+  
+  		<dependency>
+            <groupId>org.milyn</groupId>
+            <artifactId>milyn-smooks-core</artifactId>
+            <version>1.5.2</version>
+            <!--  para que corra en el ESB. CON ESTO EN EL IDE NO SIRVE 
+            <scope>provided</scope> -->
+        </dependency>
+  
+		<dependency>
+            <groupId>org.milyn</groupId>
+            <artifactId>milyn-smooks-camel</artifactId>
+            <version>1.5.2</version>
+            <!--  para que corra en el ESB. CON ESTO EN EL IDE NO SIRVE 
+            <scope>provided</scope>-->
+        </dependency>
+  
+  		<dependency>
+            <groupId>org.milyn</groupId>
+            <artifactId>milyn-smooks-edi</artifactId>
+            <version>1.5.2</version>
+            <!--  para que corra en el ESB. CON ESTO EN EL IDE NO SIRVE
+            <scope>provided</scope>-->
+        </dependency>
+              
+        <!-- COULD BE THE XSD CONTAINER -->
+        <dependency>
+            <groupId>org.milyn</groupId>
+            <artifactId>milyn-edisax-parser</artifactId>
+            <version>1.5.2</version>
+            <!--  para que corra en el ESB. CON ESTO EN EL IDE NO SIRVE-->            
+        </dependency>
+        
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-core</artifactId>
+             <version>${camel-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-test</artifactId>
+             <version>${camel-version}</version>
+        </dependency>
+        
+        <dependency>
+      		<groupId>org.apache.camel</groupId>
+      		<artifactId>camel-spring</artifactId>
+      		<version>${camel-version}</version>
+    	</dependency>
+    	
+    	<dependency>
+    		<groupId>org.apache.camel</groupId>
+    		<artifactId>camel-jms</artifactId>
+    		<version>${camel-version}</version>    
+		</dependency>
+		
+		<!-- Missed Dependency on Fuse -->
+ 		<dependency>
+			<groupId>com.wutka</groupId>
+			<artifactId>dtdparser</artifactId>
+			<version>1.21</version>
+		</dependency>
+		<dependency>
+			<groupId>org.hsqldb</groupId>
+			<artifactId>hsqldb</artifactId>
+			<version>2.3.2</version>
+		</dependency>
+		
+		
+		
+		<!-- esto molesta en fuse pero se necesita para que corra local -->
+		<dependency>
+			<groupId>org.apache.activemq</groupId>
+			<artifactId>activemq-osgi</artifactId>
+			<version>5.8.0.redhat-60024</version>
+ 		</dependency>
+ 		
+ 		
+ 		
+ 		
+	 	<dependency>
+	      <groupId>org.slf4j</groupId>
+	      <artifactId>slf4j-api</artifactId>
+	      <version>1.6.6</version>
+	    </dependency>
+	    <dependency>
+	      <groupId>org.slf4j</groupId>
+	      <artifactId>slf4j-log4j12</artifactId>
+	      <version>1.6.6</version>
+	    </dependency>
+	    <dependency>
+	      <groupId>log4j</groupId>
+	      <artifactId>log4j</artifactId>
+	      <version>1.2.17</version>
+	    </dependency>  
+    
+  </dependencies>
+
+  <build>
+    <defaultGoal>install</defaultGoal>
+    
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>2.5.1</version>
+        <configuration>
+          <source>1.6</source>
+          <target>1.6</target>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-resources-plugin</artifactId>
+        <version>2.4.3</version>
+        <configuration>
+          <encoding>UTF-8</encoding>
+        </configuration>
+      </plugin>
+
+      <!-- allows the route to be ran via 'mvn camel:run' -->
+      <plugin>
+        <groupId>org.apache.camel</groupId>
+        <artifactId>camel-maven-plugin</artifactId>
+        <version>2.10.0.redhat-60024</version>
+      </plugin>
+      
+      <!-- 12 AGO: NEW PLUGIN TO SET MAPPING -->
+      <plugin>
+            <groupId>org.milyn</groupId>
+            <artifactId>maven-ejc-plugin</artifactId>
+            <version>1.5.2</version>
+            <configuration>
+                <ediMappingFile>${basedir}/src/main/resources/META-INF/spring/edi-to-xml-order-mapping.xml</ediMappingFile>
+                <packageName>com.editoxml.order.model</packageName>
+                
+            </configuration>
+            <executions>
+                <execution>
+                	<goals>
+                		<goal>generate</goal>
+                	</goals>
+                </execution>
+            </executions>
+        </plugin>      
+      <plugin>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>maven-bundle-plugin</artifactId>                
+                <extensions>true</extensions>
+                 <!-- THE VERSION IS REQUIRED TO SKIP THE WARNING RELATED WITH IT
+                	 THE LATEST PLUGIN VERSION CAN BE FOUND AT: FELIX.APACHE.ORG --> 
+                <version>2.5.0</version>
+                <configuration>
+                    <instructions>
+                        <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
+                        <!--<Embed-Dependency>*;scope=compile|runtime</Embed-Dependency>-->
+                        <Embed-Dependency>*;groupId=org.milyn|com.wutka|org.hsqldb</Embed-Dependency>                        
+                        <Embed-Directory>OSGI-INF/lib</Embed-Directory>
+                       	<Embed-Transitive>true</Embed-Transitive>
+                        <Import-Package>org.milyn.*;version="${project.version}",
+                            javax.xml.transform.stream,
+                            *;-nouses:=true
+                        </Import-Package>                                             
+                        <Smooks-Config>${basedir}/src/main/smooks/smooks-config.xml</Smooks-Config>
+                                                
+                    </instructions>
+                </configuration>
+      </plugin>
+      
+    </plugins>
+  </build>
+
+</project>
