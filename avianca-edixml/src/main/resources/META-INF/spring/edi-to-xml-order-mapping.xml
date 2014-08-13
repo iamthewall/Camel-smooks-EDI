@@ -1,7 +1,13 @@
 <?xml version="1.1" encoding="UTF-8"?>
 <medi:edimap xmlns:medi="http://www.milyn.org/schema/edi-message-mapping-1.5.xsd">
 
-	<medi:description name="AviancaPoC" version="1.0" />
+<!-- <?xml version="1.1" encoding="UTF-8"?>
+<medi:edimap xmlnssi="http://www.w3.org/2001/XMLSchema-instance"
+    		 xmlns:medi="http://www.milyn.org/schema/edi-message-mapping"
+    		 xsi:schemaLocation="http://www.milyn.org/schema/edi-message-mapping http://www.milyn.org/schema/edi-message-mapping-1.5.xsd"
+    		>
+-->
+	<medi:description name="EDI-TO-XML" version="1.0" />
 
 	<medi:delimiters segment="&#28;" field="&#29;"
 		component="&#31;" sub-component="~" />
