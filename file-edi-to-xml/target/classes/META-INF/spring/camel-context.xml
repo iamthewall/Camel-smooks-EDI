@@ -12,82 +12,82 @@
     <import resource="jmsSetup.xml" />
 	<bean id="procesarASCII" class="com.avianca.procesarASCII"/>
 	
-	<camelContext xmlns="http://camel.apache.org/schema/spring">
-    <route id="AviancaEDIXMLSplitQueue">
+	<camelContext xmlns="http://camel.apache.org/schema/spring" id="EDI-TO-XML-ROUTE">
+    <route id="EDIXMLSplitQueue">
         <from uri="file:src/data/inboxXML?noop=true"/>
         <split parallelProcessing="false" streaming="true" timeout="0" id="encolamientoEDIXML">
             <tokenize token="&#28;UNH" endToken="UNT" includeTokens="false" group="1000"></tokenize>
             <loadBalance>
                 <roundRobin/>
-                <to uri="jms:queue:EDIXMLAvianca1"/>
-                <to uri="jms:queue:EDIXMLAvianca2"/>
-                <to uri="jms:queue:EDIXMLAvianca3"/>
-                <to uri="jms:queue:EDIXMLAvianca4"/>
-                <to uri="jms:queue:EDIXMLAvianca5"/>
-                <to uri="jms:queue:EDIXMLAvianca6"/>
-                <to uri="jms:queue:EDIXMLAvianca7"/>
-                <to uri="jms:queue:EDIXMLAvianca8"/>
-                <to uri="jms:queue:EDIXMLAvianca9"/>                     
+                <to uri="jms:queue:EDI-XML-QUEUE-1"/>
+                <to uri="jms:queue:EDI-XML-QUEUE-2"/>
+                <to uri="jms:queue:EDI-XML-QUEUE-3"/>
+                <to uri="jms:queue:EDI-XML-QUEUE-4"/>
+                <to uri="jms:queue:EDI-XML-QUEUE-5"/>
+                <to uri="jms:queue:EDI-XML-QUEUE-6"/>
+                <to uri="jms:queue:EDI-XML-QUEUE-7"/>
+                <to uri="jms:queue:EDI-XML-QUEUE-8"/>
+                <to uri="jms:queue:EDI-XML-QUEUE-9"/>                     
             </loadBalance>
         </split>
     </route>
     
-    <route id="AviancaTransformQueuesXML1">
-        <from uri="jms:queue:EDIXMLAvianca1"/>
+    <route id="EDIXML-Transform-Queues-route-1">
+        <from uri="jms:queue:EDI-XML-QUEUE-1"/>
         <bean ref="procesarASCII"/>            
         <to uri="smooks:META-INF/config/smooks-config.xml"/>
         <to uri="file:src/data/outboxXML?fileName=${date:now:yyyyMMddHHmmssSSSS}1.xml" id="xmlFinal1"/>        
     </route>
     
-    <route id="AviancaTransformQueuesXML2">
-        <from uri="jms:queue:EDIXMLAvianca2"/>        
+    <route id="EDIXML-Transform-Queues-route-2">
+        <from uri="jms:queue:EDI-XML-QUEUE-2"/>       
         <bean ref="procesarASCII"/>        
         <to uri="smooks:META-INF/config/smooks-config.xml"/>
         <to uri="file:src/data/outboxXML?fileName=${date:now:yyyyMMddHHmmssSSSS}2.xml" id="xmlFinal2"/>        
     </route>
     
-    <route id="AviancaTransformQueuesXML3">
-        <from uri="jms:queue:EDIXMLAvianca3"/>
+    <route id="EDIXML-Transform-Queues-route-3">
+        <from uri="jms:queue:EDI-XML-QUEUE-3"/>
         <bean ref="procesarASCII"/>
         <to uri="smooks:META-INF/config/smooks-config.xml"/>
         <to uri="file:src/data/outboxXML?fileName=${date:now:yyyyMMddHHmmssSSSS}3.xml" id="xmlFinal3"/>       
     </route>
-    <route id="AviancaTransformQueuesXML4">
-        <from uri="jms:queue:EDIXMLAvianca4"/>
+    <route id="EDIXML-Transform-Queues-route-4">
+        <from uri="jms:queue:EDI-XML-QUEUE-4"/>
         <bean ref="procesarASCII"/>
         <to uri="smooks:META-INF/config/smooks-config.xml"/>
         <to uri="file:src/data/outboxXML?fileName=${date:now:yyyyMMddHHmmssSSSS}4.xml" id="xmlFinal4"/>        
     </route>
-    <route id="AviancaTransformQueuesXML5">
-        <from uri="jms:queue:EDIXMLAvianca5"/>
+    <route id="EDIXML-Transform-Queues-route-5">
+        <from uri="jms:queue:EDI-XML-QUEUE-5"/>
         <bean ref="procesarASCII"/>
         <to uri="smooks:META-INF/config/smooks-config.xml"/>
         <to uri="file:src/data/outboxXML?fileName=${date:now:yyyyMMddHHmmssSSSS}5.xml" id="xmlFinal5"/>               
     </route>
     
-    <route id="AviancaTransformQueuesXML6">
-        <from uri="jms:queue:EDIXMLAvianca6"/>
+    <route id="EDIXML-Transform-Queues-route-6">
+        <from uri="jms:queue:EDI-XML-QUEUE-6"/>
         <bean ref="procesarASCII"/>
         <to uri="smooks:META-INF/config/smooks-config.xml"/>
         <to uri="file:src/data/outboxXML?fileName=${date:now:yyyyMMddHHmmssSSSS}6.xml" id="xmlFinal6"/>        
     </route>
     
-     <route id="AviancaTransformQueuesXML7">
-        <from uri="jms:queue:EDIXMLAvianca7"/>
+     <route id="EDIXML-Transform-Queues-route-7">
+        <from uri="jms:queue:EDI-XML-QUEUE-7"/>
         <bean ref="procesarASCII"/>
         <to uri="smooks:META-INF/config/smooks-config.xml"/>
         <to uri="file:src/data/outboxXML?fileName=${date:now:yyyyMMddHHmmssSSSS}7.xml" id="xmlFinal7"/>        
     </route>
     
-    <route id="AviancaTransformQueuesXML8">
-        <from uri="jms:queue:EDIXMLAvianca8"/>
+    <route id="EDIXML-Transform-Queues-route-8">
+        <from uri="jms:queue:EDI-XML-QUEUE-8"/>
         <bean ref="procesarASCII"/>
         <to uri="smooks:META-INF/config/smooks-config.xml"/>
         <to uri="file:src/data/outboxXML?fileName=${date:now:yyyyMMddHHmmssSSSS}8.xml" id="xmlFinal8"/>        
     </route>
     
-    <route id="AviancaTransformQueuesXML9">
-        <from uri="jms:queue:EDIXMLAvianca9"/>
+    <route id="EDIXML-Transform-Queues-route-9">
+        <from uri="jms:queue:EDI-XML-QUEUE-9"/>
         <bean ref="procesarASCII"/>
         <to uri="smooks:META-INF/config/smooks-config.xml"/>
         <to uri="file:src/data/outboxXML?fileName=${date:now:yyyyMMddHHmmssSSSS}9.xml" id="xmlFinal9"/>        
