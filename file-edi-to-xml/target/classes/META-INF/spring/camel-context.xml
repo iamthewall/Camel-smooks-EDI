@@ -23,11 +23,14 @@
                 <to uri="jms:queue:EDI-XML-QUEUE-2"/>
                 <to uri="jms:queue:EDI-XML-QUEUE-3"/>
                 <to uri="jms:queue:EDI-XML-QUEUE-4"/>
+                
+                <!-- FOR PRODUCTION -->
+                <!-- 
                 <to uri="jms:queue:EDI-XML-QUEUE-5"/>
                 <to uri="jms:queue:EDI-XML-QUEUE-6"/>
                 <to uri="jms:queue:EDI-XML-QUEUE-7"/>
                 <to uri="jms:queue:EDI-XML-QUEUE-8"/>
-                <to uri="jms:queue:EDI-XML-QUEUE-9"/>                     
+                <to uri="jms:queue:EDI-XML-QUEUE-9"/>-->                     
             </loadBalance>
         </split>
     </route>
@@ -58,6 +61,8 @@
         <to uri="smooks:META-INF/config/smooks-config.xml"/>
         <to uri="file:src/data/outboxXML?fileName=${date:now:yyyyMMddHHmmssSSSS}4.xml" id="xmlFinal4"/>        
     </route>
+    <!-- FOR PRODUCTION -->
+    <!-- 
     <route id="EDIXML-Transform-Queues-route-5">
         <from uri="jms:queue:EDI-XML-QUEUE-5"/>
         <bean ref="procesarASCII"/>
@@ -92,7 +97,7 @@
         <to uri="smooks:META-INF/config/smooks-config.xml"/>
         <to uri="file:src/data/outboxXML?fileName=${date:now:yyyyMMddHHmmssSSSS}9.xml" id="xmlFinal9"/>        
     </route>
-    
+    -->
 </camelContext>
 	
 	</beans>

@@ -28,7 +28,7 @@
 
 	<bean id="procesarASCII" class="com.avianca.procesarASCII"/>
 	
-	<camelContext xmlns="http://camel.apache.org/schema/spring">
+	<camelContext xmlns="http://camel.apache.org/schema/spring" id="EDI-TO-CSV-AMQ-ROUTE">
     <route id="AviancaSplitQueue">
         <from uri="file:src/data/inboxqueue?noop=true"/>
         <split parallelProcessing="false" streaming="true" timeout="0" id="divisionGrande">
@@ -37,15 +37,15 @@
             <tokenize token="UNH" endToken="UNT" includeTokens="true" group="5000"></tokenize>
             <loadBalance>
                 <roundRobin/>
-                <to uri="jms:queue:EDIAvianca1"/>
-                <to uri="jms:queue:EDIAvianca2"/>
-                <to uri="jms:queue:EDIAvianca3"/>
-                <to uri="jms:queue:EDIAvianca4"/>
+                <to uri="jms:queue:EDI-CSV-QUEUE-1"/>
+                <to uri="jms:queue:EDI-CSV-QUEUE-2"/>
+                <to uri="jms:queue:EDI-CSV-QUEUE-3"/>
+                <to uri="jms:queue:EDI-CSV-QUEUE-4"/>
             </loadBalance>
         </split>
     </route>
-    <route id="AviancaTransformQueues1">
-        <from uri="jms:queue:EDIAvianca1"/>
+    <route id="EDICSV-Transform-Queues-route-1">
+        <from uri="jms:queue:EDI-CSV-QUEUE-1"/>
         <split parallelProcessing="true" streaming="true" timeout="0" id="divisionIntermedia">
             <description>&lt;from uri="file:src/data/temp?noop=true"/&gt;</description>
             <tokenize token="UNH" endToken="UNT" includeTokens="true" group="5000"></tokenize>
@@ -53,8 +53,8 @@
             <to uri="file:src/data/outboxqueue?fileName=${date:now:yyyyMMddHHmmssSSSS}1.csv" id="csvFinal"/>
         </split>
     </route>
-    <route id="AviancaTransformQueues2">
-        <from uri="jms:queue:EDIAvianca2"/>
+    <route id="EDICSV-Transform-Queues-route-2">
+        <from uri="jms:queue:EDI-CSV-QUEUE-2"/>
         <split parallelProcessing="true" streaming="true" timeout="0" id="divisionIntermedia2">
             <description>&lt;from uri="file:src/data/temp?noop=true"/&gt;</description>
             <tokenize token="UNH" endToken="UNT" includeTokens="true" group="5000"></tokenize>
@@ -62,8 +62,8 @@
             <to uri="file:src/data/outboxqueue?fileName=${date:now:yyyyMMddHHmmssSSSS}2.csv" id="csvFinal2"/>
         </split>
     </route>
-    <route id="AviancaTransformQueues3">
-        <from uri="jms:queue:EDIAvianca3"/>
+    <route id="EDICSV-Transform-Queues-route-3">
+        <from uri="jms:queue:EDI-CSV-QUEUE-3"/>
         <split parallelProcessing="true" streaming="true" timeout="0" id="divisionIntermedia3">
             <description>&lt;from uri="file:src/data/temp?noop=true"/&gt;</description>
             <tokenize token="UNH" endToken="UNT" includeTokens="true" group="5000"></tokenize>
@@ -71,8 +71,8 @@
             <to uri="file:src/data/outboxqueue?fileName=${date:now:yyyyMMddHHmmssSSSS}3.csv" id="csvFinal3"/>
         </split>
     </route>
-    <route id="AviancaTransformQueues4">
-        <from uri="jms:queue:EDIAvianca4"/>
+    <route id="EDICSV-Transform-Queues-route-4">
+        <from uri="jms:queue:EDI-CSV-QUEUE-4"/>
         <split parallelProcessing="true" streaming="true" timeout="0" id="divisionIntermedia4">
             <description>&lt;from uri="file:src/data/temp?noop=true"/&gt;</description>
             <tokenize token="UNH" endToken="UNT" includeTokens="true" group="5000"></tokenize>

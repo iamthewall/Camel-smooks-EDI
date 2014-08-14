@@ -24,8 +24,8 @@
 
 	<bean id="procesarASCII" class="com.avianca.procesarASCII"/>
 
-	<camelContext xmlns="http://camel.apache.org/schema/spring">
-    <route id="AviancaSplitFile">
+	<camelContext xmlns="http://camel.apache.org/schema/spring" id="EDI-TO-CSV-ROUTE">
+    <route id="EDI-Split-File">
         <from uri="file:src/data/inbox?noop=true"/>
         <split parallelProcessing="false" streaming="true" timeout="0" id="divisionGrandeFile">
             <description>to uri="file:src/data/outbox?fileName=${date:now:yyyyMMddHHmmssSSSSS}.data" id="ediFile"/</description>
@@ -33,7 +33,7 @@
             <to uri="file:src/data/temp?fileName=${date:now:yyyyMMddHHmmssSSSS}.data" id="ediTemporalFile"/>
         </split>
     </route>
-    <route id="AviancaTransformFile">
+    <route id="EDI-Transform-File-CSV">
         <from uri="file:src/data/temp?noop=true"/>
         <split parallelProcessing="false" streaming="true" timeout="0" id="divisionIntermediaFile">
             <tokenize token="UNH" endToken="UNT" includeTokens="true" group="5000"></tokenize>
