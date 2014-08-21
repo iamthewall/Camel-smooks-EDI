@@ -28,8 +28,8 @@
 
 	<bean id="procesarASCII" class="com.avianca.procesarASCII"/>
 	
-	<camelContext xmlns="http://camel.apache.org/schema/spring" id="EDI-TO-CSV-AMQ-ROUTE">
-    <route id="AviancaSplitQueue">
+	<camelContext id="EDI-TO-CSV-AMQ-ROUTE" xmlns="http://camel.apache.org/schema/spring">
+    <route id="EDI-CSV-SplitQueue">
         <from uri="file:src/data/inboxqueue?noop=true"/>
         <split parallelProcessing="false" streaming="true" timeout="0" id="divisionGrande">
             <description>&lt;to uri="file:src/data/outbox?fileName=${date:now:yyyyMMddHHmmssSSSSS}.data" id="ediFile"/&gt;
