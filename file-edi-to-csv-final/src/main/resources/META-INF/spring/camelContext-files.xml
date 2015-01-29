@@ -22,9 +22,9 @@
         http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd
        ">
 
-	<bean id="procesarASCII" class="com.avianca.procesarASCII"/>
+	<bean id="procesarASCII" class="com.edicsv.procesarASCII"/>
 
-	<camelContext xmlns="http://camel.apache.org/schema/spring" id="EDI-TO-CSV-ROUTE">
+<camelContext xmlns="http://camel.apache.org/schema/spring" id="EDI-TO-CSV-ROUTE">
     <route id="EDI-Split-File">
         <from uri="file:src/data/inbox?noop=true"/>
         <split parallelProcessing="false" streaming="true" timeout="0" id="divisionGrandeFile">

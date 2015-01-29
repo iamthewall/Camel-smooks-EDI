@@ -26,9 +26,9 @@
        
        	<import resource="jmsSetup.xml" />
 
-	<bean id="procesarASCII" class="com.avianca.procesarASCII"/>
+	<bean id="procesarASCII" class="com.edicsv.procesarASCII"/>
 	
-	<camelContext id="EDI-TO-CSV-AMQ-ROUTE" xmlns="http://camel.apache.org/schema/spring">
+<camelContext id="EDI-TO-CSV-AMQ-ROUTE" xmlns="http://camel.apache.org/schema/spring">
     <route id="EDI-CSV-SplitQueue">
         <from uri="file:src/data/inboxqueue?noop=true"/>
         <split parallelProcessing="false" streaming="true" timeout="0" id="divisionGrande">
