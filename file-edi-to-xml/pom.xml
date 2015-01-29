@@ -8,7 +8,7 @@
   
   <!--  bundle instead of jar to USE the felix plugin. May be changed to local deploy -->
   <packaging>bundle</packaging>
-  <version>1.1.1</version>
+  <version>1.2.0</version>
 
   <name>FILE-edi-to-xml-final</name>
   <url></url>
@@ -16,8 +16,8 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>           
-    <camel-version>2.10.0.redhat-60024</camel-version>
-    <smooks-version>1.5.2</smooks-version> <!-- WITH 1.5.1 Throws an Exception -->
+    <camel-version>2.12.0.redhat-610379</camel-version>
+    <smooks-version>1.7-SNAPSHOT</smooks-version>
   </properties>
 
   <repositories>
@@ -90,8 +90,8 @@
             <groupId>org.milyn</groupId>
             <artifactId>milyn-smooks-edi</artifactId>
             <version>${smooks-version}</version>
-            <!--  para que corra en el ESB. CON ESTO EN EL IDE NO SIRVE
-            <scope>provided</scope>-->
+<!--              para que corra en el ESB. CON ESTO EN EL IDE NO SIRVE -->
+            <scope>provided</scope>
         </dependency>
               
         <!-- COULD BE THE XSD CONTAINER -->
@@ -185,7 +185,7 @@
       <plugin>
         <groupId>org.apache.camel</groupId>
         <artifactId>camel-maven-plugin</artifactId>
-        <version>2.10.0.redhat-60024</version>
+        <version>${camel-version}</version>
       </plugin>
       
       <!-- Bundle Required to work on FUSE -->
@@ -198,9 +198,11 @@
                     <instructions>
                         <Import-Package>
                             org.milyn.smooks.edi;version="[1.5,2)",
-                            org.mvel2,
+                            <!-- org.milyn.smooks.edi;version="[1.7-SNAPSHOT)", -->
+                            <!-- Estos org.mvel2 dañan el proyecto -->                            
+                            <!-- org.mvel2,
                             org.mvel2.integration,
-                            org.mvel2.compiler,
+                            org.mvel2.compiler, -->
 <!--                        org.osgi.framework,-->
                             org.apache.camel;version="[2.10,3)",
                             org.apache.camel.builder;version="[2.10,3)",
@@ -211,11 +213,12 @@
                             org.apache.camel.main;version="[2.10,3)",
 <!--                        org.apache.camel.core.osgi;version="[2.10,3)",-->
                             org.milyn.smooks.camel.component;version="[1.5,2)",
+                            <!-- org.milyn.smooks.camel.component;version="[1.7-SNAPSHOT)" -->,
                             org.springframework.context;version="[3.1,4)",
                             org.springframework.context.support;version="[3.1,4)"
                         </Import-Package>
                         <Private-Package>
-                            com.avianca*
+                            com.edixml.*
                         </Private-Package>
 <!--                    <Bundle-Activator>my.cool.camel.CamelActivator</Bundle-Activator>-->
                     </instructions>

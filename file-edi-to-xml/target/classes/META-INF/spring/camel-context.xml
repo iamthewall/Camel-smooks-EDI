@@ -10,7 +10,7 @@
         http://activemq.apache.org/schema/core http://activemq.apache.org/schema/core/activemq-core.xsd">
        
     <import resource="jmsSetup.xml" />
-	<bean id="procesarASCII" class="com.avianca.procesarASCII"/>
+	<bean id="procesarASCII" class="com.edixml.procesarASCII"/>
 	
 	<camelContext xmlns="http://camel.apache.org/schema/spring" id="EDI-TO-XML-ROUTE">
     <route id="EDIXMLSplitQueue">
